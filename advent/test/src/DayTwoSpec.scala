@@ -3,6 +3,13 @@ import org.scalatest.flatspec.AnyFlatSpec
 import scala.io.Source
 
 class DayTwoSpec extends AnyFlatSpec {
+
+  val in =
+    Source
+      .fromResource("2.txt")
+      .getLines()
+      .toSeq
+
   val pattern = "^([\\d]+)-([\\d]+) ([a-z]): ([a-z]+)$".r
 
   def extract(line: String): (Int, Int, Char, String) =
@@ -10,12 +17,6 @@ class DayTwoSpec extends AnyFlatSpec {
       case pattern(from, to, letter, password) =>
         (from.toInt, to.toInt, letter.charAt(0), password)
     }
-
-  val in =
-    Source
-      .fromResource("2.txt")
-      .getLines()
-      .toSeq
 
   "Password Philosophy" should "check how many paswords match corporate policy" in {
     assert(
