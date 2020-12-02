@@ -1,4 +1,4 @@
-Some solitions to [Advent of Code 2020](https://adventofcode.com/2020) using Scala.
+Some solutions to [Advent of Code 2020](https://adventofcode.com/2020) using Scala.
 
 You'll need:
 
