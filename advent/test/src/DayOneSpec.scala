@@ -3,6 +3,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.io.Source
 
+// https://adventofcode.com/2020/day/1
 class DayOneSpec extends AnyFlatSpec with Matchers {
   val in =
     Source

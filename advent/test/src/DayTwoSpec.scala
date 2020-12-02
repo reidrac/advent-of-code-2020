@@ -3,8 +3,8 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.io.Source
 
+// https://adventofcode.com/2020/day/2
 class DayTwoSpec extends AnyFlatSpec with Matchers {
-
   val in =
     Source
       .fromResource("2.txt")
