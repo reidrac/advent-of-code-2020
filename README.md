@@ -7,5 +7,5 @@ You'll need:
 
 Run with:
 
-    mill _.run
+    mill advent.test
 

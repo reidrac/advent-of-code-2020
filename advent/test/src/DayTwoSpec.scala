@@ -1,7 +1,8 @@
+import org.scalatest.flatspec.AnyFlatSpec
+
 import scala.io.Source
 
-object Two {
-
+class DayTwoSpec extends AnyFlatSpec {
   val pattern = "^([\\d]+)-([\\d]+) ([a-z]): ([a-z]+)$".r
 
   def extract(line: String): (Int, Int, Char, String) =
@@ -10,15 +11,14 @@ object Two {
         (from.toInt, to.toInt, letter.charAt(0), password)
     }
 
-  def main(args: Array[String]): Unit = {
+  val in =
+    Source
+      .fromResource("2.txt")
+      .getLines()
+      .toSeq
 
-    val in =
-      Source
-        .fromResource("2.txt")
-        .getLines()
-        .toSeq
-
-    println(
+  "Password Philosophy" should "check how many paswords match corporate policy" in {
+    assert(
       in.map(extract)
         .map {
           case (from, to, letter, password) =>
@@ -28,11 +28,12 @@ object Two {
           case (from, to, count) =>
             count >= from && count <= to
         }
-        .length
+        .length == 556
     )
-    // 556
+  }
 
-    println(
+  it should "check how many paswords match corporate policy (2)" in {
+    assert(
       in.map(extract)
         .filter {
           case (pos1, pos2, _, password) =>
@@ -45,8 +46,7 @@ object Two {
               .charAt(pos1 - 1) != letter && password
               .charAt(pos2 - 1) == letter)
         }
-        .length
+        .length == 605
     )
-    // 605
   }
 }

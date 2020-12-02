@@ -1,8 +1,10 @@
 import mill._, scalalib._, scalafmt._
 
-trait AdventModule extends ScalaModule with ScalafmtModule {
+object advent extends ScalaModule {
   def scalaVersion = "2.13.4"
-}
 
-object one extends AdventModule
-object two extends AdventModule
+  object test extends Tests {
+    def ivyDeps = Agg(ivy"org.scalatest::scalatest:3.2.2")
+    def testFrameworks = Seq("org.scalatest.tools.Framework")
+  }
+}
