@@ -33,7 +33,7 @@ class DayTwoSpec extends AnyFlatSpec {
     )
   }
 
-  it should "check how many paswords match corporate policy (2)" in {
+  it should "check how many paswords match corporate policy (position)" in {
     assert(
       in.map(extract)
         .filter {
