@@ -6,13 +6,7 @@ import scala.io.Source
 
 // https://adventofcode.com/2020/day/3
 class DayThreeSpec extends AnyFlatSpec with Matchers {
-  val in =
-    Source
-      .fromResource("3.txt")
-      .getLines()
-      .toSeq
-
-  case class Mountain(width: Int, height: Int, data: Seq[Char]) {
+  class Mountain(width: Int, height: Int, data: Seq[Char]) {
     def get(x: Int, y: Int): Option[Char] = {
       if (y < height) Some(data(x % width + y * width))
       else None
@@ -31,32 +25,37 @@ class DayThreeSpec extends AnyFlatSpec with Matchers {
     }
   }
 
-  "Mountain.get" should "wrap around width" in {
-    val m = Mountain(in(0).length, in.length, in.toList.flatten)
+  object Mountain {
+    def apply(lines: Seq[String]): Mountain =
+      new Mountain(lines(0).length, lines.length, lines.flatten)
 
-    m.get(0, 0) shouldBe Some('.')
-    m.get(in(0).length, 0) shouldBe m.get(0, 0)
-    m.get(0, in.length) shouldBe None
+    def apply(resource: String): Mountain = {
+      val in = Source.fromResource(resource).getLines().toSeq
+      Mountain(in)
+    }
+  }
+
+  "Mountain.get" should "wrap around width" in {
+    List("3-base.txt", "3.txt").foreach { resource =>
+      val in = Source.fromResource(resource).getLines().toSeq
+      val m = Mountain(in)
+
+      m.get(0, 0) shouldBe Some('.')
+      m.get(in(0).length, 0) shouldBe m.get(0, 0)
+      m.get(0, in.length) shouldBe None
+    }
   }
 
   "Toboggan Trajectory" should "count trees in trajectory with slope right 3, down 1 (base case)" in {
-    val in =
-      Source
-        .fromResource("3-base.txt")
-        .getLines()
-        .toSeq
-
-    Mountain(in(0).length, in.length, in.toList.flatten)
-      .countTrees(3, 1) shouldBe 7
+    Mountain("3-base.txt").countTrees(3, 1) shouldBe 7
   }
 
   it should "count trees in trajectory with slope right 3, down 1" in {
-    val m = Mountain(in(0).length, in.length, in.toList.flatten)
-      .countTrees(3, 1) shouldBe 247
+    Mountain("3.txt").countTrees(3, 1) shouldBe 247
   }
 
   it should "count trees in trajectory with multiple slopes" in {
-    val m = Mountain(in(0).length, in.length, in.toList.flatten)
+    val m = Mountain("3.txt")
 
     List((1, 1), (3, 1), (5, 1), (7, 1), (1, 2)).foldLeft[Long](1) {
       case (acc, (right, down)) => acc * m.countTrees(right, down)
