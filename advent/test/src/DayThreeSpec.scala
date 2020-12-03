@@ -29,10 +29,8 @@ class DayThreeSpec extends AnyFlatSpec with Matchers {
     def apply(lines: Seq[String]): Mountain =
       new Mountain(lines(0).length, lines.length, lines.flatten)
 
-    def apply(resource: String): Mountain = {
-      val in = Source.fromResource(resource).getLines().toSeq
-      Mountain(in)
-    }
+    def apply(resource: String): Mountain =
+      Mountain(Source.fromResource(resource).getLines().toSeq)
   }
 
   "Mountain.get" should "wrap around width" in {
