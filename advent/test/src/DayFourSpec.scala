@@ -13,6 +13,7 @@ class DayFourSpec extends AnyFlatSpec with Matchers {
       .mkString("\n")
       .split("\\n\\n")
       .toSeq
+      .map(toTokens)
 
     val required = List(
       "byr",
@@ -41,7 +42,7 @@ class DayFourSpec extends AnyFlatSpec with Matchers {
         .toMap
 
     def withRequiredKeys: Seq[Map[String, String]] =
-      passports.map(toTokens).filterNot { passport =>
+      passports.filterNot { passport =>
         required.exists(!passport.keySet.contains(_))
       }
 
