@@ -5,8 +5,7 @@ import scala.io.Source
 
 // https://adventofcode.com/2020/day/4
 class DayFourSpec extends AnyFlatSpec with Matchers {
-
-  class PasswordValidator(resource: String) {
+  class PassportValidator(resource: String) {
     val passports = Source
       .fromResource(resource)
       .getLines()
@@ -66,10 +65,10 @@ class DayFourSpec extends AnyFlatSpec with Matchers {
   }
 
   "Passport Processing" should "count valid passports (keys)" in {
-    new PasswordValidator("4.txt").withRequiredKeys.length shouldBe 228
+    new PassportValidator("4.txt").withRequiredKeys.length shouldBe 228
   }
 
   it should "count valid passports" in {
-    new PasswordValidator("4.txt").valid.length shouldBe 175
+    new PassportValidator("4.txt").valid.length shouldBe 175
   }
 }
