@@ -7,7 +7,13 @@ import scala.io.Source
 class DayFourSpec extends AnyFlatSpec with Matchers {
 
   class PasswordValidator(resource: String) {
-    val in = Source.fromResource(resource).getLines().toSeq.mkString("\n")
+    val passports = Source
+      .fromResource(resource)
+      .getLines()
+      .toSeq
+      .mkString("\n")
+      .split("\\n\\n")
+      .toSeq
 
     val required = List(
       "byr",
@@ -35,13 +41,13 @@ class DayFourSpec extends AnyFlatSpec with Matchers {
         }
         .toMap
 
-    def withValidKeys: Seq[Map[String, String]] =
-      in.split("\\n\\n").toSeq.map(toTokens).filterNot { passport =>
+    def withRequiredKeys: Seq[Map[String, String]] =
+      passports.map(toTokens).filterNot { passport =>
         required.exists(!passport.keySet.contains(_))
       }
 
     def valid: Seq[Map[String, String]] =
-      withValidKeys.filterNot(passport =>
+      withRequiredKeys.filterNot(passport =>
         passport.toSeq
           .map {
             case ("byr", yearRe(y))         => y.toInt >= 1920 && y.toInt <= 2002
@@ -60,7 +66,7 @@ class DayFourSpec extends AnyFlatSpec with Matchers {
   }
 
   "Passport Processing" should "count valid passports (keys)" in {
-    new PasswordValidator("4.txt").withValidKeys.length shouldBe 228
+    new PasswordValidator("4.txt").withRequiredKeys.length shouldBe 228
   }
 
   it should "count valid passports" in {
