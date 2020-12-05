@@ -34,7 +34,7 @@ class DayFiveSpec extends AnyFlatSpec with Matchers {
     in.map(decode).max shouldBe 965
   }
 
-  it should "find the my seat ID" in {
+  it should "find my seat ID" in {
     in.map(decode)
       .sorted
       .sliding(2)
