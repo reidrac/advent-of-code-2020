@@ -1,6 +1,7 @@
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
+import scala.annotation.tailrec
 import scala.io.Source
 
 // https://adventofcode.com/2020/day/5
@@ -12,6 +13,7 @@ class DayFiveSpec extends AnyFlatSpec with Matchers {
     .toSeq
 
   def decode(code: String): Int = {
+    @tailrec
     def decoder(from: Int, to: Int, code: List[Char]): Int =
       code match {
         case ('F' | 'L') :: Nil  => from
