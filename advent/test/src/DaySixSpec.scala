@@ -30,7 +30,7 @@ class DaySixSpec extends AnyFlatSpec with Matchers {
         .size
     }.sum
 
-  "count" should "count the number of 'yes' answers in all group" in {
+  "count" should "count the number of 'yes' answers in all groups" in {
     count(Seq("""|abcx
                  |abcy
                  |abcz""".stripMargin)) shouldBe 6
@@ -54,11 +54,11 @@ class DaySixSpec extends AnyFlatSpec with Matchers {
                    |b""".stripMargin.split("\\n\\n").toSeq) shouldBe 6
   }
 
-  "Custom Customs" should "sum the count of all 'yes' answers in all groups" in {
+  "Custom Customs" should "count the number of 'yes' answers in all groups" in {
     count(in) shouldBe 6521
   }
 
-  it should "sum the count of shared 'yes' answers" in {
+  it should "count the number of shared 'yes' answers in all groups" in {
     countShared(in) shouldBe 3305
   }
 }
