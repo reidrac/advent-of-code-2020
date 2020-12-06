@@ -9,8 +9,7 @@ Run with:
 
     mill advent.test
 
-You can run only one test with:
+You can run only one test. For example, to run day 4 slutions:
 
-    mill advent.test.testOnly $TestSpec
-
+    mill advent.test.testOnly DayFourSpec
 
