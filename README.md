@@ -9,3 +9,8 @@ Run with:
 
     mill advent.test
 
+You can run only one test with:
+
+    mill advent.test.testOnly $TestSpec
+
+

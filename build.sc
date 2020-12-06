@@ -6,5 +6,9 @@ object advent extends ScalaModule {
   object test extends Tests with ScalafmtModule {
     def ivyDeps = Agg(ivy"org.scalatest::scalatest:3.2.2")
     def testFrameworks = Seq("org.scalatest.tools.Framework")
+
+    def testOnly(args: String*) = T.command {
+      super.runMain("org.scalatest.run", args: _*)
+    }
   }
 }
