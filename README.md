@@ -9,7 +9,7 @@ Run with:
 
     mill advent.test
 
-You can run only one test. For example, to run day 4 slutions:
+You can run only one test. For example, to run day 4 solutions:
 
     mill advent.test.testOnly DayFourSpec
 
