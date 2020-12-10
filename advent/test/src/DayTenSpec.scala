@@ -38,7 +38,7 @@ class DayTenSpec extends AnyFlatSpec with Matchers {
     a * b
   }
 
-  "findJoltsChain" should "the number of 1-jolt differences multiplied by the number of 3-jolt differences (case base)" in {
+  "countJolts" should "the number of 1-jolt differences multiplied by the number of 3-jolt differences (case base)" in {
     countJolts(baseCase) shouldBe 35
   }
 
